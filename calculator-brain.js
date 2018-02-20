@@ -7,7 +7,92 @@
 //Once it reaches a sign, it takes note and continues the getting number function until the end of the string
 //Decimal doesn't need a function because the traverse should automatically convert the string into a floating point integer (this is javascript)
 
+
+
+
+//Button Inputs
+var zero = document.getElementById("zero").addEventListener("click", function (){
+    var result = document.getElementById("result");
+    result.innerHTML += "0";
+});
+
+var one = document.getElementById("one").addEventListener("click", function (){
+    var result = document.getElementById("result");
+    result.innerHTML += "1";
+});
+var two = document.getElementById("two").addEventListener("click", function (){
+    var result = document.getElementById("result");
+    result.innerHTML += "2";
+});
+var three = document.getElementById("three").addEventListener("click", function (){
+    var result = document.getElementById("result");
+    result.innerHTML += "3";
+});
+var four = document.getElementById("four").addEventListener("click", function (){
+    var result = document.getElementById("result");
+    result.innerHTML += "4";
+});
+var five = document.getElementById("five").addEventListener("click", function (){
+    var result = document.getElementById("result");
+    result.innerHTML += "5";
+});
+var six = document.getElementById("six").addEventListener("click", function (){
+    var result = document.getElementById("result");
+    result.innerHTML += "6";
+});
+var seven = document.getElementById("seven").addEventListener("click", function (){
+    var result = document.getElementById("result");
+    result.innerHTML += "7";
+});
+var eight = document.getElementById("eight").addEventListener("click", function (){
+    var result = document.getElementById("result");
+    result.innerHTML += "8";
+});
+var nine = document.getElementById("nine").addEventListener("click",function (){
+    var result = document.getElementById("result");
+    result.innerHTML += "9";
+});
+
+var multiply = document.getElementById("multiply").addEventListener("click",function (){
+    var result = document.getElementById("result");
+    result.innerHTML += " x ";
+});
+
+var divide = document.getElementById("divide").addEventListener("click",function (){
+    var result = document.getElementById("result");
+    result.innerHTML += " / ";
+});
+
+var add = document.getElementById("add").addEventListener("click",function (){
+    var result = document.getElementById("result");
+    result.innerHTML += " + ";
+});
+
+var subtract = document.getElementById("subtract").addEventListener("click",function (){
+    var result = document.getElementById("result");
+    result.innerHTML += " - ";
+});
+
+var decimal = document.getElementById("decimal").addEventListener("click",function (){
+    var result = document.getElementById("result");
+    result.innerHTML += ".";
+});
+
+
+var c = document.getElementById("c")
+c.addEventListener("click", clearScreen);
+
+function clearScreen(){
+    var result = document.getElementById("result");
+    result.innerHTML = "0";
+}
+
+
+
+
+
 var computation;
+
 
 function add (a, b){
     return a + b;
@@ -55,11 +140,6 @@ function factorial (){
 
 }
 
-function clear (){
-    document.getElementById("result").innerHTML = ""; //To clear the "screen"
-    //Afunction needs to be here to clear the simulated memory
-}
-
 function equals (){
 
 }
@@ -71,3 +151,7 @@ function traverseString(){
 /*function BodmasChecker(){
 
 }*/
+
+
+
+
