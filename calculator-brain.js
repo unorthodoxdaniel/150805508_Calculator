@@ -90,6 +90,12 @@ var rightPara = document.getElementById("right-para").addEventListener("click",f
 
 var back = document.getElementById("backspace").addEventListener("click", backSpace);
 
+var sine = document.getElementById("sin").addEventListener("click", sin);
+var cosine = document.getElementById("cos").addEventListener("click", cos);
+var tangent = document.getElementById("tan").addEventListener("click", tan);
+
+var modulus = document.getElementById("modulus").addEventListener("click", modulus);
+//Equals
 var evaluate = document.getElementById("equal").addEventListener("click", equals);
 
 
@@ -107,30 +113,40 @@ function add (a, b){
     return a + b;
 }
 
-function subtract (){
+function subtract (a, b){
     return a - b;
 
 }
 
-function multiply (){
+function multiply (a, b){
     return a * b;
 }
 
-function divide (){
+function divide (a,b){
     return a / b;
 }
 
-function sin (){
-    x = document.getElementById("result").innerHTML;
-    return Math.sin(x);
+function sin (x){
+    x = document.getElementById("result");
+    var temp = x.innerHTML;
+    var value = Math.sin(temp); //Had to use temp values to help with the computation showing on the result screen.
+    x.innerHTML = value; //Instead of returning it, it just dsiplays it on the screen.
 }
 
 function cos (x){
-    return Math.cos(x);
+    x = document.getElementById("result");
+    var temp = x.innerHTML;
+    var value = Math.cos(temp); //Had to use temp values to help with the computation showing on the result screen.
+    alert(value);
+    x.innerHTML = value; //Instead of returning it, it just dsiplays it on the screen.
 }
 
 function tan (x){
-    return Math.tan(x);
+    x = document.getElementById("result");
+    var temp = x.innerHTML;
+    var value = Math.tan(temp); //Had to use temp values to help with the computation showing on the result screen.
+    alert(value);
+    x.innerHTML = value; //Instead of returning it, it just dsiplays it on the screen.
 }
 
 function mod (){
@@ -152,9 +168,9 @@ function factorial (x){
 function backSpace(){
     var res = document.getElementById("result");
     var temp = res.innerHTML;
-    console.log(temp);
+    //console.log(temp);
     var temp2 = temp.slice(0, -1);
-    console.log(temp2);
+    //console.log(temp2);
     res.innerHTML = temp2;
     if (res.innerHTML == ""){
         res.innerHTML = "0";
@@ -246,12 +262,13 @@ function traverseString(str){
 
 
 function postfixComputation (str){
-    var str = str;
-    
+    str += ")"; //Makes the if statement work for some reason.
+
     var stack = [];
+    var currentAns = ""; 
     for (var i = 0; i <= str.length; i++){
-        if (str.charAt(i) == "1"){ //|| (str.charAt(i) == "2") || (str.charAt(i) == "3") || (str.charAt(i) == "4") || (str.charAt(i) == "5") || (str.charAt(i) == "6") || (str.charAt(i) == "7") || (str.charAt(i) == "8") || (str.charAt(i) == "9") || (str.charAt(i) == "0")){
-            stack.unshift(charAt(i));
+        if ((str.charAt(i) == "1") || (str.charAt(i) == "2") || (str.charAt(i) == "3") || (str.charAt(i) == "4") || (str.charAt(i) == "5") || (str.charAt(i) == "6") || (str.charAt(i) == "7") || (str.charAt(i) == "8") || (str.charAt(i) == "9") || (str.charAt(i) == "0")){
+            stack.unshift(str.charAt(i));
         }
 
         else if ((str.charAt(i) == "+") || (str.charAt(i) == "-") || (str.charAt(i) == "x") || (str.charAt(i) == "/")){
@@ -260,23 +277,25 @@ function postfixComputation (str){
             b = stack.shift();
             a = stack.shift();
 
+            
+
             if (str.charAt(i) == "+"){
-                var currentAns = add(a,b);
+                currentAns = add(a,b); //Why is is saying that add is not a function?
                 stack.unshift(currentAns);
             }
 
             else if (str.charAt(i) == "-"){
-                var currentAns = subtract(a,b);
+                currentAns = subtract(a,b);
                 stack.unshift(currentAns);
             }
 
             else if (str.charAt(i) == "x"){
-                var currentAns = multiply(a,b);
+                currentAns = multiply(a,b);
                 stack.unshift(currentAns);
             }
 
             else if (str.charAt(i) == "/"){
-                var currentAns = divide(a,b);
+                currentAns = divide(a,b);
                 stack.unshift(currentAns);
             }
         }
@@ -288,7 +307,7 @@ function postfixComputation (str){
 function computesin(){
 
 }
-var sine = document.getElementById("sin").addEventListener("click", sin);
+
 
 
 /*var stack = [];
