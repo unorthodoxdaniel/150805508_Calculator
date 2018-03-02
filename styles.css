@@ -6,6 +6,15 @@ body {
 #result{
     text-align: right;
     padding-right: 5px;
+    background-color: #65c8d0; 
+    height: 35px;
+}
+
+#input {
+    text-align: right;
+    padding-right: 5px;
+    background-color: #65c8d0; 
+    height: 35px;
 }
 
 #button-container {

@@ -12,80 +12,80 @@
 
 //Button Inputs
 var zero = document.getElementById("zero").addEventListener("click", function (){
-    var result = document.getElementById("result");
-    result.innerHTML += "0";
+    var input = document.getElementById("input");
+    input.innerHTML += "0";
 });
 
 var one = document.getElementById("one").addEventListener("click", function (){
-    var result = document.getElementById("result");
-    result.innerHTML += "1";
+    var input = document.getElementById("input");
+    input.innerHTML += "1";
 });
 var two = document.getElementById("two").addEventListener("click", function (){
-    var result = document.getElementById("result");
-    result.innerHTML += "2";
+    var input = document.getElementById("input");
+    input.innerHTML += "2";
 });
 var three = document.getElementById("three").addEventListener("click", function (){
-    var result = document.getElementById("result");
-    result.innerHTML += "3";
+    var input = document.getElementById("input");
+    input.innerHTML += "3";
 });
 var four = document.getElementById("four").addEventListener("click", function (){
-    var result = document.getElementById("result");
-    result.innerHTML += "4";
+    var input = document.getElementById("input");
+    input.innerHTML += "4";
 });
 var five = document.getElementById("five").addEventListener("click", function (){
-    var result = document.getElementById("result");
-    result.innerHTML += "5";
+    var input = document.getElementById("input");
+    input.innerHTML += "5";
 });
 var six = document.getElementById("six").addEventListener("click", function (){
-    var result = document.getElementById("result");
-    result.innerHTML += "6";
+    var input = document.getElementById("input");
+    input.innerHTML += "6";
 });
 var seven = document.getElementById("seven").addEventListener("click", function (){
-    var result = document.getElementById("result");
-    result.innerHTML += "7";
+    var input = document.getElementById("input");
+    input.innerHTML += "7";
 });
 var eight = document.getElementById("eight").addEventListener("click", function (){
-    var result = document.getElementById("result");
-    result.innerHTML += "8";
+    var input = document.getElementById("input");
+    input.innerHTML += "8";
 });
 var nine = document.getElementById("nine").addEventListener("click",function (){
-    var result = document.getElementById("result");
-    result.innerHTML += "9";
+    var input = document.getElementById("input");
+    input.innerHTML += "9";
 });
 
 var multiply = document.getElementById("multiply").addEventListener("click",function (){
-    var result = document.getElementById("result");
-    result.innerHTML += " x ";
+    var input = document.getElementById("input");
+    input.innerHTML += " x ";
 });
 
 var divide = document.getElementById("divide").addEventListener("click",function (){
-    var result = document.getElementById("result");
-    result.innerHTML += " / ";
+    var input = document.getElementById("input");
+    input.innerHTML += " / ";
 });
 
 var add = document.getElementById("add").addEventListener("click",function (){
-    var result = document.getElementById("result");
-    result.innerHTML += " + ";
+    var input = document.getElementById("input");
+    input.innerHTML += " + ";
 });
 
 var subtract = document.getElementById("subtract").addEventListener("click",function (){
-    var result = document.getElementById("result");
-    result.innerHTML += " - ";
+    var input = document.getElementById("input");
+    input.innerHTML += " - ";
 });
 
 var decimal = document.getElementById("decimal").addEventListener("click",function (){
-    var result = document.getElementById("result");
-    result.innerHTML += ".";
+    var input = document.getElementById("input");
+    input.innerHTML += ".";
 });
 
 var leftPara = document.getElementById("left-para").addEventListener("click",function (){
-    var result = document.getElementById("result");
-    result.innerHTML += "(";
+    var input = document.getElementById("input");
+    input.innerHTML += "(";
 });
 
 var rightPara = document.getElementById("right-para").addEventListener("click",function (){
-    var result = document.getElementById("result");
-    result.innerHTML += ")";
+    var input = document.getElementById("input");
+    input.innerHTML += ")";
 });
 
 var back = document.getElementById("backspace").addEventListener("click", backSpace);
@@ -104,47 +104,51 @@ var c = document.getElementById("c")
 c.addEventListener("click", clearScreen);
 
 function clearScreen(){
-    var result = document.getElementById("result");
-    result.innerHTML = "0";
+    var input = document.getElementById("input");
+    input.innerHTML = "0";
 }
 
 
-function add (a, b){
+function addition(a, b){
+    //alert("a =" + a);
+    //alert(b); add(x, y)
     return a + b;
 }
 
-function subtract (a, b){
+function subtraction(a, b){ 
     return a - b;
 
 }
 
-function multiply (a, b){
+function multiplication(a, b){
     return a * b;
 }
 
-function divide (a,b){
+function division(a,b){
     return a / b;
 }
 
 function sin (x){
-    x = document.getElementById("result");
+    x = document.getElementById("input");
+    
     var temp = x.innerHTML;
-    var value = Math.sin(temp); //Had to use temp values to help with the computation showing on the result screen.
+    //x.innerHTML = "sin(";
+    var value = Math.sin(temp); //Had to use temp values to help with the computation showing on the input screen.
     x.innerHTML = value; //Instead of returning it, it just dsiplays it on the screen.
 }
 
 function cos (x){
-    x = document.getElementById("result");
+    x = document.getElementById("input");
     var temp = x.innerHTML;
-    var value = Math.cos(temp); //Had to use temp values to help with the computation showing on the result screen.
+    var value = Math.cos(temp); //Had to use temp values to help with the computation showing on the input screen.
     alert(value);
     x.innerHTML = value; //Instead of returning it, it just dsiplays it on the screen.
 }
 
 function tan (x){
-    x = document.getElementById("result");
+    x = document.getElementById("input");
     var temp = x.innerHTML;
-    var value = Math.tan(temp); //Had to use temp values to help with the computation showing on the result screen.
+    var value = Math.tan(temp); //Had to use temp values to help with the computation showing on the input screen.
     alert(value);
     x.innerHTML = value; //Instead of returning it, it just dsiplays it on the screen.
 }
@@ -166,7 +170,7 @@ function factorial (x){
 }
 
 function backSpace(){
-    var res = document.getElementById("result");
+    var res = document.getElementById("input");
     var temp = res.innerHTML;
     //console.log(temp);
     var temp2 = temp.slice(0, -1);
@@ -262,45 +266,85 @@ function traverseString(str){
 
 
 function postfixComputation (str){
-    str += ")"; //Makes the if statement work for some reason.
-
+    //str += ")"; //Makes the if statement work for some reason. Because charAt(i) is for strings and this makes it a string
+    alert(str);
     var stack = [];
     var currentAns = ""; 
     for (var i = 0; i <= str.length; i++){
-        if ((str.charAt(i) == "1") || (str.charAt(i) == "2") || (str.charAt(i) == "3") || (str.charAt(i) == "4") || (str.charAt(i) == "5") || (str.charAt(i) == "6") || (str.charAt(i) == "7") || (str.charAt(i) == "8") || (str.charAt(i) == "9") || (str.charAt(i) == "0")){
-            stack.unshift(str.charAt(i));
+        if ((str[i] == "1") || (str[i] == "2") || (str[i] == "3") || (str[i] == "4") || (str[i] == "5") || (str[i] == "6") || (str[i] == "7") || (str[i] == "8") || (str[i]== "9") || (str[i] == "0")){
+            
+            stack.unshift(str[i]);
+            
         }
 
-        else if ((str.charAt(i) == "+") || (str.charAt(i) == "-") || (str.charAt(i) == "x") || (str.charAt(i) == "/")){
+        else if ((str[i] == "+") || (str[i] == "-") || (str[i] == "x") || (str[i] == "/")){
             
-            operator = stack.shift(); //Remove the operand
-            b = stack.shift();
-            a = stack.shift();
+            /*var operator = str.shift(); //Remove the operand
+            var y = str.shift();
+            alert(y);
+            Number(y);
+            var x = str.shift();
+            alert(x);
+            Number(x);*/
 
             
 
-            if (str.charAt(i) == "+"){
-                currentAns = add(a,b); //Why is is saying that add is not a function?
+            if (str[i] == "+"){ //probem here
+                var operator = str.shift(); //Remove the operand
+                var y = str.shift();
+                var x = str.shift();
+                x = Number(x);
+                y = Number(y);
+    
+                Number(currentAns);
+                currentAns = addition(x, y);
+                //alert(currentAns);
+                stack.unshift(currentAns);
+                
+            }
+
+            else if (str[i] == "-"){
+                var operator = str.shift(); //Remove the operand
+                var y = str.shift();
+                var x = str.shift();
+                x = Number(x);
+                y = Number(y);
+    
+                Number(currentAns);
+                currentAns = subtraction(x, y);
+                //alert(currentAns);
                 stack.unshift(currentAns);
             }
 
-            else if (str.charAt(i) == "-"){
-                currentAns = subtract(a,b);
+            else if (str[i] == "x"){
+                var operator = str.shift(); //Remove the operand
+                var y = str.shift();
+                var x = str.shift();
+                x = Number(x);
+                y = Number(y);
+    
+                Number(currentAns);
+                currentAns = multiplication(x, y);
+                //alert(currentAns);
                 stack.unshift(currentAns);
             }
 
-            else if (str.charAt(i) == "x"){
-                currentAns = multiply(a,b);
-                stack.unshift(currentAns);
-            }
-
-            else if (str.charAt(i) == "/"){
-                currentAns = divide(a,b);
+            else if (str[i] == "/"){
+                var operator = str.shift(); //Remove the operand
+                var y = str.shift();
+                var x = str.shift();
+                x = Number(x);
+                y = Number(y);
+    
+                Number(currentAns);
+                currentAns = division(x, y);
+                //alert(currentAns);
                 stack.unshift(currentAns);
             }
         }
         
     }
+return currentAns;    
 }
 
 
@@ -330,9 +374,10 @@ stack.push("(")
 }*/
 
 function equals (){
-    var computation = document.getElementById("result").innerHTML;
+    var computation = document.getElementById("input").innerHTML;
     
     var x = (traverseString(computation));
-    alert(postfixComputation(x));
+    var resultValue = postfixComputation(x);
+    document.getElementById("result").innerHTML= resultValue;
 
 }
