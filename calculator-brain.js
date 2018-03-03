@@ -94,8 +94,16 @@ var squareRoot = document.getElementById("square-root").addEventListener("click"
 var xSquared = document.getElementById("x-squared").addEventListener("click", x2);
 var modulus = document.getElementById("modulus").addEventListener("click", modulus);
 var fact = document.getElementById("factorial").addEventListener("click", factorial);
+var pi = document.getElementById("pi").addEventListener("click", piFunction);
+
+document.getElementById("log").addEventListener("click", logFunction);
+document.getElementById("exp").addEventListener("click", exp);
+document.getElementById("tenX").addEventListener("click", tenPowerX);
+document.getElementById("x-power-y").addEventListener("click", xPowerY);
+
 //Equals
 var evaluate = document.getElementById("equal").addEventListener("click", equals);
+
 
 
 //Clearing the screen.
@@ -105,6 +113,16 @@ c.addEventListener("click", clearScreen);
 function clearScreen(){
     var input = document.getElementById("input");
     input.innerHTML = "";
+    var result = document.getElementById("result");
+    result.innerHTML = "";
+}
+
+//Clearing Entry
+var ce = document.getElementById("ce")
+ce.addEventListener("click", clearEntry);
+
+function clearEntry(){
+    document.getElementById("result").innerHTML = "";
 }
 
 
@@ -159,12 +177,18 @@ function mod (a, b){
     return a % b;
 }
 
+function piFunction(){
+    var x = Math.PI;
+    input.innerHTML += x; 
+}
 function exp (){
-
+    var expComp = Math.exp(input.innerHTML);
+    result.innerHTML = expComp; 
 }
 
-function log (x){
-    return Math.log10(x);
+function logFunction (){
+    var logComp = Math.log10(input.innerHTML);
+    result.innerHTML = logComp;
 }
 
 function factorialComputation (x){
@@ -202,8 +226,22 @@ function x2(x){
     result.innerHTML = value; //Instead of returning it, it just dsiplays it on the screen.
 }
 
-function xPowerY(x,y){
+var powBool;
+var sub;
 
+function xPowerY(){
+    sub = input.innerHTML;
+    result.innerHTML = sub + "^";
+    powBool = true;
+    input.innerHTML="";
+    //input.addEventListener("")
+    //input.innerHTML = Math.pow(sub,)
+
+}
+
+function tenPowerX(){
+    var tenPowerComp = Math.pow(10, input.innerHTML);
+    result.innerHTML = tenPowerComp;
 }
 
 function backSpace(){
@@ -213,13 +251,28 @@ function backSpace(){
     var temp2 = temp.slice(0, -1);
     //console.log(temp2);
     res.innerHTML = temp2;
-    if (res.innerHTML == ""){
-        res.innerHTML = "0";
-    }
+   /* if (res.innerHTML == ""){
+        res.innerHTML = "";
+    }*/
 }
 
 
+function checkPrec(x){
+    if ((x == "*") || (x == "%") || (x == "/")){
+        return 3;
+    }
 
+    if ((x == "+") || (x == "-")){
+        return 2 ;
+    }
+
+    if((x == "(")){
+        return 1;
+    }
+
+    if ((x == "1") ||(x ==  "2" )||(x ==  "3" )||(x ==  "4" )||(x ==  "5" )||(x ==  "6" )||(x ==  "7" ) ||(x ==  "8") ||(x ==  "9" )||(x ==  "0")){
+     return 0;
+}
 
 
 function traverseString(str){
@@ -228,22 +281,7 @@ function traverseString(str){
     var stack = [];
     stack.unshift("(");
 
-    function checkPrec(x){
-        if (x == "*" || "/"){
-            return 3;
-        }
-
-        if (x == "+" || "-"){
-            return 2 ;
-        }
-
-        if(x == "("){
-            return 1;
-        }
-
-        if ((x == "1") ||(x ==  "2" )||(x ==  "3" )||(x ==  "4" )||(x ==  "5" )||(x ==  "6" )||(x ==  "7" ) ||(x ==  "8") ||(x ==  "9" )||(x ==  "0")){
-         return 0;
-    }
+    
 }
     
 
@@ -401,10 +439,17 @@ function computesin(){
 }
 
 function equals (){
-    var computation = document.getElementById("input").innerHTML;
+    if (powBool == true){
+        sup = input.innerHTML;
+        result.innerHTML = Math.pow(sub, sup);
+        powBool = false;
+    }
+    else {
+        var computation = document.getElementById("input").innerHTML;
     
-    var x = (traverseString(computation));
-    var resultValue = postfixComputation(x);
-    document.getElementById("result").innerHTML= resultValue;
+        var x = (traverseString(computation));
+        var resultValue = postfixComputation(x);
+        document.getElementById("result").innerHTML= resultValue;
+    }
 
 }
