@@ -1,13 +1,9 @@
-//FIND 306 note. This may be an implementation of parse tree
-
 //Create a sting called computation
 //For every button clicked. the inner HTML AND the string is updated
 //Once the user types equal, then te traverse string operation starts.
 //It goes through a value, breaks at a sign and then stores the value as a number
 //Once it reaches a sign, it takes note and continues the getting number function until the end of the string
 //Decimal doesn't need a function because the traverse should automatically convert the string into a floating point integer (this is javascript)
-
-
 
 
 //Button Inputs
@@ -94,7 +90,10 @@ var sine = document.getElementById("sin").addEventListener("click", sin);
 var cosine = document.getElementById("cos").addEventListener("click", cos);
 var tangent = document.getElementById("tan").addEventListener("click", tan);
 
+var squareRoot = document.getElementById("square-root").addEventListener("click", squareRt);
+var xSquared = document.getElementById("x-squared").addEventListener("click", x2);
 var modulus = document.getElementById("modulus").addEventListener("click", modulus);
+var fact = document.getElementById("factorial").addEventListener("click", factorial);
 //Equals
 var evaluate = document.getElementById("equal").addEventListener("click", equals);
 
@@ -105,7 +104,7 @@ c.addEventListener("click", clearScreen);
 
 function clearScreen(){
     var input = document.getElementById("input");
-    input.innerHTML = "0";
+    input.innerHTML = "";
 }
 
 
@@ -132,28 +131,31 @@ function sin (x){
     x = document.getElementById("input");
     
     var temp = x.innerHTML;
-    //x.innerHTML = "sin(";
+    x.innerHTML = "sin(" + temp +")";
     var value = Math.sin(temp); //Had to use temp values to help with the computation showing on the input screen.
-    x.innerHTML = value; //Instead of returning it, it just dsiplays it on the screen.
+    y = document.getElementById("result");
+    result.innerHTML = value; //Instead of returning it, it just dsiplays it on the screen.
 }
 
 function cos (x){
     x = document.getElementById("input");
     var temp = x.innerHTML;
+    x.innerHTML = "cos(" + temp +")";
     var value = Math.cos(temp); //Had to use temp values to help with the computation showing on the input screen.
-    alert(value);
-    x.innerHTML = value; //Instead of returning it, it just dsiplays it on the screen.
+    y = document.getElementById("result");
+    result.innerHTML = value; //Instead of returning it, it just dsiplays it on the screen.
 }
 
 function tan (x){
     x = document.getElementById("input");
     var temp = x.innerHTML;
+    x.innerHTML = "tan(" + temp +")";
     var value = Math.tan(temp); //Had to use temp values to help with the computation showing on the input screen.
-    alert(value);
-    x.innerHTML = value; //Instead of returning it, it just dsiplays it on the screen.
+    y = document.getElementById("result");
+    result.innerHTML = value; //Instead of returning it, it just dsiplays it on the screen.
 }
 
-function mod (){
+function mod (a, b){
     return a % b;
 }
 
@@ -165,8 +167,43 @@ function log (x){
     return Math.log10(x);
 }
 
-function factorial (x){
-    
+function factorialComputation (x){
+    if (x == 0){
+        return 1;
+    }
+    return x * factorialComputation (x - 1);    
+}
+
+function factorial(){
+    x = document.getElementById("input");
+    var temp = x.innerHTML;
+    temp = Number(temp);
+
+
+    result.innerHTML = factorialComputation(temp);
+}
+
+function squareRt (x){
+    x = document.getElementById("input");
+    var temp = x.innerHTML;
+    x.innerHTML = temp;
+    var value = Math.sqrt(temp); //Had to use temp values to help with the computation showing on the input screen.
+    y = document.getElementById("result");
+    result.innerHTML = value; //Instead of returning it, it just dsiplays it on the screen.
+}
+
+function x2(x){
+    x = document.getElementById("input");
+    var temp = x.innerHTML;
+    x.innerHTML = temp;
+    temp = Number(temp);
+    var value = Math.pow(temp, 2); //Had to use temp values to help with the computation showing on the input screen.
+    y = document.getElementById("result");
+    result.innerHTML = value; //Instead of returning it, it just dsiplays it on the screen.
+}
+
+function xPowerY(x,y){
+
 }
 
 function backSpace(){
@@ -180,6 +217,8 @@ function backSpace(){
         res.innerHTML = "0";
     }
 }
+
+
 
 
 
@@ -209,14 +248,34 @@ function traverseString(str){
     
 
     var newString = [];
+    var tempOp = ""; //Temporary operand.
     for (var i = 0; i <= str.length; i++){
         
         if ((str.charAt(i) == "1") || (str.charAt(i) == "2") || (str.charAt(i) == "3") || (str.charAt(i) == "4") || (str.charAt(i) == "5") || (str.charAt(i) == "6") || (str.charAt(i) == "7") || (str.charAt(i) == "8") || (str.charAt(i) == "9") || (str.charAt(i) == "0")){
-            newString.unshift(str.charAt(i));
-            //alert("Postfix: " + newString);
-            //alert("Stack: " + stack);
+            tempOp += str.charAt(i);
+            console.log("x" + tempOp);
+                    var j = i + 1;
+
+                        while ((str.charAt(j) != " ") && (j <= str.length) && (str.charAt(j) != ")")){ //Checks if the next value is a space, because if an operator is there, there'd definitely a space. Aso checks value used for iteration is beyond the bounds, so we don;t have an infinite loop. //|| (str.charAt(j) != "+") || (str.charAt(j) != "-") || (str.charAt(j) != "x") || (str.charAt(j) != "/")){
+                            tempOp += str.charAt(j); //Add the next value
+                            j++; 
+                            i++; //Jump to the next value.
+                            
+                        } 
+                                
+                        newString.unshift(tempOp);
+                        console.log(tempOp);
+                        tempOp = "";
+                        //alert("Postfix: " + newString);
+                        //alert("Stack: " + stack);
+                    }
             
-        }
+            
+            
+            
+
+            
+        
 
         else if (str.charAt(i) == "("){
             stack.unshift("(");
@@ -270,43 +329,34 @@ function postfixComputation (str){
     alert(str);
     var stack = [];
     var currentAns = ""; 
-    for (var i = 0; i <= str.length; i++){
-        if ((str[i] == "1") || (str[i] == "2") || (str[i] == "3") || (str[i] == "4") || (str[i] == "5") || (str[i] == "6") || (str[i] == "7") || (str[i] == "8") || (str[i]== "9") || (str[i] == "0")){
-            
+    for (var i = str.length; i >= 0; i--){    
+        if (isNaN(str[i]) == false){ //Checks if the value is a number or not.
+
             stack.unshift(str[i]);
+            console.log(str[i] + "is num");
             
         }
 
         else if ((str[i] == "+") || (str[i] == "-") || (str[i] == "x") || (str[i] == "/")){
-            
-            /*var operator = str.shift(); //Remove the operand
-            var y = str.shift();
-            alert(y);
-            Number(y);
-            var x = str.shift();
-            alert(x);
-            Number(x);*/
 
-            
+            if (str[i] == "+"){
+        
+                    var y = stack.shift();
+                    var x = stack.shift();
+                    x = Number(x);
+                    y = Number(y);
+        
+                    Number(currentAns);
+                    currentAns = addition(x, y);
+                    //alert(currentAns);
+                    stack.unshift(currentAns);
+                    alert("Final:" + stack);
 
-            if (str[i] == "+"){ //probem here
-                var operator = str.shift(); //Remove the operand
-                var y = str.shift();
-                var x = str.shift();
-                x = Number(x);
-                y = Number(y);
-    
-                Number(currentAns);
-                currentAns = addition(x, y);
-                //alert(currentAns);
-                stack.unshift(currentAns);
-                
             }
 
             else if (str[i] == "-"){
-                var operator = str.shift(); //Remove the operand
-                var y = str.shift();
-                var x = str.shift();
+                var y = stack.shift();
+                var x = stack.shift();
                 x = Number(x);
                 y = Number(y);
     
@@ -317,9 +367,8 @@ function postfixComputation (str){
             }
 
             else if (str[i] == "x"){
-                var operator = str.shift(); //Remove the operand
-                var y = str.shift();
-                var x = str.shift();
+                var y = stack.shift();
+                var x = stack.shift();
                 x = Number(x);
                 y = Number(y);
     
@@ -330,9 +379,8 @@ function postfixComputation (str){
             }
 
             else if (str[i] == "/"){
-                var operator = str.shift(); //Remove the operand
-                var y = str.shift();
-                var x = str.shift();
+                var y = stack.shift();
+                var x = stack.shift();
                 x = Number(x);
                 y = Number(y);
     
@@ -351,27 +399,6 @@ return currentAns;
 function computesin(){
 
 }
-
-
-
-/*var stack = [];
-stack.push(2);       
-stack.push(5);       
-var i = stack.pop(); 
-alert(i);    
-*/
-
-/*stack.push("(");
-//Traverse the stack
-if operand, 
-stack.push(operand)
-
-if("(")
-stack.push("(")
-
-/*function BodmasChecker(){
-
-}*/
 
 function equals (){
     var computation = document.getElementById("input").innerHTML;
