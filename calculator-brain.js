@@ -69,6 +69,11 @@ var subtract = document.getElementById("subtract").addEventListener("click",func
     input.innerHTML += " - ";
 });
 
+var modulus = document.getElementById("modulus").addEventListener("click", function(){
+    var input = document.getElementById("input");
+    input.innerHTML += " % ";
+});
+
 var decimal = document.getElementById("decimal").addEventListener("click",function (){
     var input = document.getElementById("input");
     input.innerHTML += ".";
@@ -92,7 +97,7 @@ var tangent = document.getElementById("tan").addEventListener("click", tan);
 
 var squareRoot = document.getElementById("square-root").addEventListener("click", squareRt);
 var xSquared = document.getElementById("x-squared").addEventListener("click", x2);
-var modulus = document.getElementById("modulus").addEventListener("click", modulus);
+
 var fact = document.getElementById("factorial").addEventListener("click", factorial);
 var pi = document.getElementById("pi").addEventListener("click", piFunction);
 
@@ -258,7 +263,7 @@ function backSpace(){
 
 
 function checkPrec(x){
-    if ((x == "*") || (x == "%") || (x == "/")){
+    if ((x == "x") || (x == "%") || (x == "/")){
         return 3;
     }
 
@@ -273,6 +278,7 @@ function checkPrec(x){
     if ((x == "1") ||(x ==  "2" )||(x ==  "3" )||(x ==  "4" )||(x ==  "5" )||(x ==  "6" )||(x ==  "7" ) ||(x ==  "8") ||(x ==  "9" )||(x ==  "0")){
      return 0;
 }
+}
 
 
 function traverseString(str){
@@ -282,7 +288,7 @@ function traverseString(str){
     stack.unshift("(");
 
     
-}
+
     
 
     var newString = [];
@@ -319,7 +325,7 @@ function traverseString(str){
             stack.unshift("(");
         }
 
-       else if ((str.charAt(i) == "+") || (str.charAt(i) == "-") || (str.charAt(i) == "x") || (str.charAt(i) == "/")){
+       else if ((str.charAt(i) == "+") || (str.charAt(i) == "-") || (str.charAt(i) == "/") || (str.charAt(i) == "%") || (str.charAt(i) == "x")){
             
             var operator = str.charAt(i);
             
@@ -328,6 +334,7 @@ function traverseString(str){
                 //To not let it remove the left parentheses
                 if (stack[j] == "("){
                     stack.unshift(operator);
+                    console.log("stack" + stack[j]);
                 }
                 else {
                     newString.unshift(stack.shift());
@@ -375,7 +382,7 @@ function postfixComputation (str){
             
         }
 
-        else if ((str[i] == "+") || (str[i] == "-") || (str[i] == "x") || (str[i] == "/")){
+        else if ((str[i] == "+") || (str[i] == "-") || (str[i] == "x") || (str[i] == "/") || (str[i] == "%")){
 
             if (str[i] == "+"){
         
@@ -427,6 +434,18 @@ function postfixComputation (str){
                 //alert(currentAns);
                 stack.unshift(currentAns);
             }
+
+            else if (str[i] == "%"){
+                var y = stack.shift();
+                var x = stack.shift();
+                x = Number(x);
+                y = Number(y);
+    
+                Number(currentAns);
+                currentAns = mod(x, y);
+                //alert(currentAns);
+                stack.unshift(currentAns);
+            }
         }
         
     }
@@ -447,8 +466,8 @@ function equals (){
     else {
         var computation = document.getElementById("input").innerHTML;
     
-        var x = (traverseString(computation));
-        var resultValue = postfixComputation(x);
+        var converted = (traverseString(computation));
+        var resultValue = postfixComputation(converted);
         document.getElementById("result").innerHTML= resultValue;
     }
 
